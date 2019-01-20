@@ -9,6 +9,7 @@
       break;  
 	}  
 ```	
+- 数据库编码选择utf8mb4
 =======
 # xiaoshuo
 小说cms
