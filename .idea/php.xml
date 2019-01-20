@@ -4,7 +4,6 @@
     <include_path>
       <path value="$PROJECT_DIR$/vendor/topthink/think-installer" />
       <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/rmccue/requests" />
     </include_path>
   </component>
 </project>

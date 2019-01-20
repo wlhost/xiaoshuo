@@ -1,10 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{extend name="pub/base" /}
+{block name="title"}
+<title>分类新增</title>
+{/block}
+
+{block name="body"}
+<article class="clearfix pd-20">
+    <form class="form form-horizontal" action="{:url('save')}" method="post">
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>分类名：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" name="cate_name">
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>性别：</label>
+            <div class="form-controls col-xs-8 col-sm-9">
+                <span class="select-box">
+					<select name="gender" class="select">
+						<option value="male">男</option>
+						<option value="female">女</option>
+					</select>
+                </span>
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+
+<!--请在下方写此页面业务相关的脚本-->
+{include file="pub/validate_scripts" /}
+<script type="text/javascript">
+    $(function () {
+        $("form").validate({
+            rules: {
+                cate_name: {
+                    required: true
+                }
+            },
+            onkeyup: false,
+            focusCleanup: false,
+            success: "valid",
+        });
+    });
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+{/block}

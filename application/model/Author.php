@@ -14,13 +14,13 @@ use think\Model;
 class Author extends Model
 {
     protected $pk='id';
-    protected $autoWriteTimestamp = 'datetime';
+    protected $autoWriteTimestamp = true;
 
     public function books(){
         return $this->hasMany('book');
     }
 
     public function setAuthorNameAttr($value){
-        return trim(strip_tags($value));
+        return trim($value);
     }
 }

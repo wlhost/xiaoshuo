@@ -1,7 +1,7 @@
 {extend name="pub/mbase" /}
 {block name="seo"}
 <title>{$book.book_name}全文阅读-{$book.book_name}最新章节-{$book.author.author_name}-{$site_name}</title>
-<meta name="description" content="{$book.book_name}是一本类型为{$book.tag2}的{$book.tag}小说,作者是{$book.author.author_name}">
+<meta name="description" content="{$book.book_name}是一本类型为{$book.tags}的{$book.category}小说,作者是{$book.author.author_name}">
 {/block}
 
 {block name="css"}
@@ -167,13 +167,11 @@
                     <span>{$book.click}点击</span>
                 </div>
                 <div>
-                    {volist name="tags" id="vo" key="k"}
-                    {if $k % 2 == 0}
-                    <button class="J_Tag btn btn-mini btn-outline-purple">{$vo}</button>
+                    {if $gender == "female"}
+                    <button class="J_Tag btn btn-mini btn-outline-purple">{$book.category}</button>
                     {else /}
-                    <button class="J_Tag btn btn-mini btn-outline-primary">{$vo}</button>
+                    <button class="J_Tag btn btn-mini btn-outline-primary">{$book.category}</button>
                     {/if}
-                    {/volist}
                 </div>
             </div>
         </div>
@@ -197,7 +195,7 @@
         <div class="block-title">简介</div>
         <div class="text-muted J_DescContent">
             {$book.summary}<br />
-            内容标签：{$book.tag2}
+            内容标签：{$book.tags}
         </div>
         <div>
             <a class="more pull-right text-muted J_ShowAllBar">更多&gt;&gt;</a>

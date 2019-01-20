@@ -1,35 +1,65 @@
 {extend name="pub/base" /}
-{block name="content"}
-<div class="x-body">
-    <form class="layui-form" action="{:url('update')}" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="{$banner.id}">
-        <div class="layui-form-item">
-            <label class="layui-form-label">
-                <span class="x-red">*</span>标题
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" value="{$banner.title}" name="title" required="" lay-verify="required" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">
-                <span class="x-red">*</span>漫画id
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" value="{$banner.book_id}" name="book_id" required="" lay-verify="required" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">封面</label>
-            <div class="layui-input-inline">
-                <input type="file" name="pic_name" class="layui-input">
+{block name="title"}
+<title>轮播编辑</title>
+{/block}
+
+{block name="body"}
+<article class="Hui-admin-page-container">
+    <form action="{:url('update')}" method="post" class="form form-horizontal" enctype="multipart/form-data">
+        <input type="hidden" value="{$banner.id}" name="id">
+        <input type="hidden" value="{$returnUrl}" name="returnUrl">
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$banner.title}" name="title">
             </div>
         </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label"></label>
-            <input type="submit" class="layui-btn" value="保存">
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3">图片：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="btn-upload">
+				<a href="javascript:;" class="btn btn-primary radius btn-upload"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
+				<input type="file" multiple name="pic_name" class="input-file">
+				</span>
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>小说id：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$banner.book_id}" name="book_id">
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
         </div>
     </form>
-</div>
+</article>
+
+<!--请在下方写此页面业务相关的脚本-->
+{include file="pub/validate_scripts" /}
+<script type="text/javascript">
+    $(function(){
+        $("form").validate({
+            rules:{
+                title:{
+                    required:true,
+                    minlength:1,
+                    maxlength:50
+                },
+                book_id:{
+                    required:true
+                }
+            },
+            onkeyup:false,
+            focusCleanup:false,
+            success:"valid",
+        });
+    });
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
 {/block}

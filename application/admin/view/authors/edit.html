@@ -1,20 +1,45 @@
 {extend name="pub/base" /}
-{block name="content"}
-<div class="x-body">
-    <form class="layui-form" action="{:url('update')}" method="post" enctype="multipart/form-data">
+{block name="title"}
+<title>作者编辑</title>
+{/block}
+
+{block name="body"}
+<article class="Hui-admin-page-container">
+    <form action="{:url('update')}" method="post" class="form form-horizontal" enctype="multipart/form-data">
         <input type="hidden" value="{$author.id}" name="id">
-        <div class="layui-form-item">
-            <label class="layui-form-label">
-                <span class="x-red">*</span>作者名字
-            </label>
-            <div class="layui-input-inline">
-                <input type="text" value="{$author.author_name}" name="author_name" required="" lay-verify="required" autocomplete="off" class="layui-input">
+        <input type="hidden" value="{$returnUrl}" name="returnUrl">
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>作者名：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$author.author_name}" name="author_name">
             </div>
         </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label"></label>
-            <input type="submit" class="layui-btn" value="保存">
+
+        <div class="row clearfix">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
         </div>
     </form>
-</div>
+</article>
+
+<!--请在下方写此页面业务相关的脚本-->
+{include file="pub/validate_scripts" /}
+<script type="text/javascript">
+    $(function(){
+        $("form").validate({
+            rules:{
+                author_name:{
+                    required:true,
+                    minlength:1,
+                    maxlength:10
+                }
+            },
+            onkeyup:false,
+            focusCleanup:false,
+            success:"valid",
+        });
+    });
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
 {/block}

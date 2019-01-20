@@ -33,61 +33,58 @@ class Banners extends Base
     public function save(Request $request)
     {
         $data = $request->param();
-        $validate = new \app\admin\validate\Banner();
-        if ($validate->check($data)) {
-            if (!empty($request->file())){
-                $pic = $request->file('pic_name');
-                $dir = App::getRootPath() . '/public/static/upload/banner/';
-                if (!file_exists($dir)) {
-                    mkdir($dir, 0777, true);
-                }
-                $info = $pic->validate(['size' => 2048000, 'ext' => 'jpg,jpeg,png'])->rule('md5')->move($dir);
-                if ($info) {
-                    $data['pic_name'] = $info->getSaveName();
-                }
+
+        if (!empty($request->file())) {
+            $pic = $request->file('pic_name');
+            $dir = App::getRootPath() . '/public/static/upload/banner/';
+            if (!file_exists($dir)) {
+                mkdir($dir, 0777, true);
             }
-            $result = Banner::create($data);
-            if ($result) {
-                $this->redirect('index/jump');
-            } else {
-                $this->error('添加失败');
+            $info = $pic->validate(['size' => 2048000, 'ext' => 'jpg,jpeg,png'])->rule('md5')->move($dir);
+            if ($info) {
+                $data['pic_name'] = $info->getSaveName();
             }
-        } else {
-            $this->error($validate->getError());
         }
+        $result = Banner::create($data);
+        if ($result) {
+            $this->success('添加成功', 'index', '', 1);
+        } else {
+            $this->error('添加失败');
+        }
+
     }
 
     public function edit($id)
     {
+        $returnUrl = input('returnUrl');
         $banner = Banner::get($id);
-        $this->assign('banner', $banner);
+        $this->assign([
+            'banner' => $banner,
+            'returnUrl' => $returnUrl
+        ]);
         return view();
     }
 
     public function update(Request $request)
     {
         $data = $request->param();
-        $validate = new \app\admin\validate\Banner();
-        if ($validate->check($data)) {
-            if (!empty($request->file())){
-                $pic = $request->file('pic_name');
-                $dir = App::getRootPath() . '/public/static/upload/banner/';
-                if (!file_exists($dir)) {
-                    mkdir($dir, 0777, true);
-                }
-                $info = $pic->validate(['size' => 2048000, 'ext' => 'jpg,jpeg,png'])->rule('md5')->move($dir);
-                if ($info) {
-                    $data['pic_name'] = $info->getSaveName();
-                }
+        $returnUrl = $data['returnUrl'];
+        if (!empty($request->file())) {
+            $pic = $request->file('pic_name');
+            $dir = App::getRootPath() . '/public/static/upload/banner/';
+            if (!file_exists($dir)) {
+                mkdir($dir, 0777, true);
             }
-            $result = Banner::update($data);
-            if ($result) {
-                $this->redirect('index/jump');
-            } else {
-                $this->error('修改失败');
+            $info = $pic->validate(['size' => 2048000, 'ext' => 'jpg,jpeg,png'])->rule('md5')->move($dir);
+            if ($info) {
+                $data['pic_name'] = $info->getSaveName();
             }
+        }
+        $result = Banner::update($data);
+        if ($result) {
+            $this->success('编辑成功', $returnUrl, '', 1);
         } else {
-            $this->error($validate->getError());
+            $this->error('修改失败');
         }
     }
 

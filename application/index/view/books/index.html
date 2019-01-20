@@ -1,7 +1,7 @@
 {extend name="pub/base" /}
 {block name="seo"}
 <title>{$book.book_name}全文阅读-{$book.book_name}最新章节-{$book.author.author_name}-{$site_name}</title>
-<meta name="description" content="{$book.book_name}是一本类型为{$book.tag2}的{$book.tag}小说,作者是{$book.author.author_name}">
+<meta name="description" content="{$book.book_name}是一本类型为{$book.tags}的{$book.category}小说,作者是{$book.author.author_name}">
 {/block}
 {block name="css"}
 <style>
@@ -445,16 +445,14 @@
                 </div>
                 <div class="book-brief">
                     {$book.summary}<br />
-                    内容标签：{$book.tag2}
+                    内容标签：{$book.tags}
                 </div>
                 <div style="border-bottom: dashed 1px #e5e5e5; height: 1.5rem; line-height:1.5rem; margin-bottom:0.375rem;">
                     更新时间：{$book.update_time}
                 </div>
                 <div class="row">
                     <span class="pull-left">分类：</span>
-                    {volist name="tags" id="vo"}
-                    <span class="tag">{$vo}</span>
-                    {/volist}
+                    <span class="tag">{$book.category}</span>
                 </div>
                 <div class="row">
                     <button onclick="javascript:location.href='{:url("chapters/index",["id" => $start])}'" class="btn btn-primary">开始阅读</button>

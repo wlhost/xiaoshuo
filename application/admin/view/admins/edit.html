@@ -1,10 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{extend name="pub/base" /}
+{block name="title"}
+<title>管理员编辑</title>
+{/block}
+
+{block name="body"}
+<article class="Hui-admin-page-container">
+    <form action="{:url('update')}" method="post" class="form form-horizontal">
+        <input type="hidden" value="{$admin.id}" name="id">
+        <input type="hidden" value="{$returnUrl}" name="returnUrl">
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{$admin.username}" name="username">
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>密码：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" name="password" id="password">
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>重复密码：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" name="password2">
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</article>
+
+<!--请在下方写此页面业务相关的脚本-->
+{include file="pub/validate_scripts" /}
+<script type="text/javascript">
+    $(function(){
+        $("form").validate({
+            rules:{
+                username:{
+                    required:true,
+                    minlength:1,
+                    maxlength:50
+                },
+                password2:{
+                    equalTo: "#password"
+                },
+            },
+            onkeyup:false,
+            focusCleanup:false,
+            success:"valid",
+        });
+    });
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+{/block}

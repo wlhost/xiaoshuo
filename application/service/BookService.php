@@ -16,7 +16,10 @@ class BookService
     public function getPagedBooksAdmin($where = '1=1'){
         $data = Book::where($where);
         $books = $data->with('author,chapters')->order('id','desc')
-            ->paginate(5);
+            ->paginate(5,false,[
+                'type'     => 'util\AdminPage',
+                'var_page' => 'page',
+            ]);
         return [
             'books' => $books,
             'count' => $data->count()
@@ -43,8 +46,8 @@ class BookService
     }
 
     public function getRandBooks($num){
-        return Db::query("SELECT ad1.id,book_name,summary,click FROM book AS ad1 JOIN 
-(SELECT ROUND(RAND() * ((SELECT MAX(id) FROM book)-(SELECT MIN(id) FROM book))+(SELECT MIN(id) FROM book)) AS id)
+        return Db::query("SELECT ad1.id,book_name,summary,click FROM xwx_book AS ad1 JOIN 
+(SELECT ROUND(RAND() * ((SELECT MAX(id) FROM xwx_book)-(SELECT MIN(id) FROM xwx_book))+(SELECT MIN(id) FROM xwx_book)) AS id)
  AS t2 WHERE ad1.id >= t2.id ORDER BY ad1.id LIMIT " . $num);
     }
 

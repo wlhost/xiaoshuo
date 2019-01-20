@@ -31,16 +31,22 @@ class Authors extends Base
 
     public function edit($id)
     {
+        $returnUrl = input('returnUrl');
         $author = Author::get($id);
-        $this->assign('author',$author);
+        $this->assign([
+            'author' => $author,
+            'returnUrl' => $returnUrl
+        ]);
         return view();
     }
 
     public function update(Request $request, $id)
     {
-        $result = Author::update($request->param());
+        $data = $request->param();
+        $returnUrl = $data['returnUrl'];
+        $result = Author::update($data);
         if ($result){
-            $this->redirect('index/jump');
+            $this->success('编辑成功',$returnUrl,'',1);
         }else{
             $this->error('编辑失败');
         }
@@ -55,5 +61,25 @@ class Authors extends Base
         }
         $author->delete();
         return ['err' => '0','msg' => '删除成功'];
+    }
+
+    public function search($author_name){
+        $data = $this->authorService->getAuthors([
+            ['author_name','like','%'.$author_name.'%']
+        ]);
+        $this->assign([
+            'authors' => $data['authors'],
+            'count' => $data['count']
+        ]);
+        return view('index');
+    }
+
+    public function getBooksByAuthor($author_name){
+        $data = $this->authorService->getBooksByAuthor($author_name); //查出书籍
+        $this->assign([
+            'books' => $data['books'],
+            'count' => count($data['books'])
+        ]);
+        return view('books/index');
     }
 }

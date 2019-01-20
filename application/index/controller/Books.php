@@ -10,6 +10,7 @@ namespace app\index\controller;
 
 
 use app\model\Book;
+use app\model\Category;
 use think\Db;
 use app\service\ChapterService;
 
@@ -29,17 +30,17 @@ class Books extends Base
         }
         $book->click = $book->click + 1;
         $book->isUpdate(true)->save();
-        $tags = explode('|',$book->tag);
         $start = cache('book_start' . $id);
         if ($start == false) {
-            $db = Db::query('SELECT id FROM chapter WHERE book_id = ' . $id . ' ORDER BY id LIMIT 1');
+            $db = Db::query('SELECT id FROM xwx_chapter WHERE book_id = ' . $id . ' ORDER BY `order` LIMIT 1');
             $start = $db ? $db[0]['id'] : -1;
             cache('book_start' . $id, $start);
         }
+        $category = Category::where('cate_name','=',$book->category)->find();
         $this->assign([
             'book' => $book,
-            'tags' => $tags,
             'start' => $start,
+            'gender' => $category->gender,
             'header_title' => $book->book_name,
         ]);
         return view($this->tpl);

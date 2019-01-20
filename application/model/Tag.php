@@ -14,9 +14,9 @@ use think\Model;
 class Tag extends Model
 {
     protected $pk='id';
-    protected $autoWriteTimestamp = 'datetime';
+    protected $autoWriteTimestamp = true;
 
     public function setTagNameAttr($value){
-        return trim(strip_tags($value));
+        return trim($value);
     }
 }

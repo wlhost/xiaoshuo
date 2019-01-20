@@ -28,7 +28,6 @@ class Books extends Base
     {
         $this->bookService = new BookService();
         $this->authorService = new AuthorService();
-        $this->tagService = new TagService();
     }
 
     public function index()
@@ -55,58 +54,46 @@ class Books extends Base
     {
         $book = new Book();
         $data = $request->param();
-        $validate = new \app\admin\validate\Book();
-        if ($validate->check($data)) {
-            if ($this->bookService->getByName($data['book_name'])) {
-                $this->error('书名已经存在');
-            }
+        if ($this->bookService->getByName(trim($data['book_name']))) {
+            $this->error('书名已经存在');
+        }
 
-            //作者处理
-            $author = $this->authorService->getByName($data['author']);
-            if (is_null($author)) {//如果作者不存在
-                $author = new \app\model\Author();
-                $author->author_name = $data['author'];
-                $author->save();
-            }
-            $book->author_id = $author->id;
-            $result = $book->save($data);
-            if ($result) {
-                //标签处理
-                if (!empty($data['tag'])) {
-                    $tags = explode('|', $data['tag']); //拆分标签成数组
-                    foreach ($tags as $tagname) {
-                        $tag = $this->tagService->getByName($tagname);
-                        if (is_null($tag) || empty($tag)) {
-                            Tag::Create(['tag_name' => $tagname]); //如果数据库里没有该标签，则追加
-                        }
-                    }
+        //作者处理
+        $author = $this->authorService->getByName($data['author']);
+        if (is_null($author)) {//如果作者不存在
+            $author = new \app\model\Author();
+            $author->author_name = $data['author'];
+            $author->save();
+        }
+        $book->author_id = $author->id;
+        $result = $book->save($data);
+        if ($result) {
+            if (!empty($request->file())) {
+                $dir = App::getRootPath() . '/public/static/upload/book/' . $book->id;
+                if (!file_exists($dir)) {
+                    mkdir($dir, 0777, true);
                 }
-                if (!empty($request->file())) {
-                    $dir = App::getRootPath() . '/public/static/upload/book/' . $book->id;
-                    if (!file_exists($dir)) {
-                        mkdir($dir, 0777, true);
-                    }
-                    $cover = $request->file('cover');
-                    $cover->validate(['size' => 1024000, 'ext' => 'jpg,png,gif,jpeg'])
-                        ->move($dir, 'cover.jpg');
-                    //清理浏览器缓存
-                    header("Last-Modified: " . gmdate("D, d M Y H:i:s") . "GMT");
-                    header("Cache-Control: no-cache, must-revalidate");
-                }
-                $this->redirect('index/jump');
-            } else {
-                $this->error('添加失败');
+                $cover = $request->file('cover');
+                $cover->validate(['size' => 1024000, 'ext' => 'jpg,png,gif,jpeg'])
+                    ->move($dir, 'cover.jpg');
+                //清理浏览器缓存
+                header("Last-Modified: " . gmdate("D, d M Y H:i:s") . "GMT");
+                header("Cache-Control: no-cache, must-revalidate");
             }
-
+            $this->success('添加成功', 'index', '', 1);
         } else {
-            $this->error($validate->getError());
+            $this->error('添加失败');
         }
     }
 
-    public function edit($id)
+    public function edit()
     {
-        $book = Book::with('author')->find($id);
-        $this->assign('book', $book);
+        $returnUrl = input('returnUrl');
+        $book = Book::with('author')->find(input('id'));
+        $this->assign([
+            'book' => $book,
+            'returnUrl' => $returnUrl
+        ]);
         return view();
     }
 
@@ -114,48 +101,33 @@ class Books extends Base
     {
         $book = new Book();
         $data = $request->param();
-        $validate = new \app\admin\validate\Book();
-        if ($validate->check($data)) {
-            //作者处理
-            $author = $this->authorService->getByName($data['author']);
-            if (is_null($author)) {//如果是新作者
-                $author = new \app\model\Author();
-                $author->author_name = $data['author'];
-                $author->save();
-            } else { //如果作者已经存在
-                $data['author_id'] = $author->id;
-            }
-            $result = $book->isUpdate(true)->save($data);
-            if ($result) {
-                //标签处理
-                if (!empty($data['tag'])) {
-                    $tags = explode('|', $data['tag']); //拆分标签成数组
-                    foreach ($tags as $tagname) {
-                        $tag = $this->tagService->getByName($tagname);
-                        if (is_null($tag) || empty($tag)) {
-                            Tag::create(['tag_name' => $tagname]); //如果数据库里没有该标签，则追加
-                        }
-                    }
+        $returnUrl = $data['returnUrl'];
+        //作者处理
+        $author = $this->authorService->getByName($data['author']);
+        if (is_null($author)) {//如果是新作者
+            $author = new \app\model\Author();
+            $author->author_name = $data['author'];
+            $author->save();
+        } else { //如果作者已经存在
+            $data['author_id'] = $author->id;
+        }
+        $result = $book->isUpdate(true)->save($data);
+        if ($result) {
+            if (!empty($request->file())) {
+                $dir = App::getRootPath() . '/public/static/upload/book/' . $book->id;
+                if (!file_exists($dir)) {
+                    mkdir($dir, 0777, true);
                 }
-                if (!empty($request->file())) {
-                    $dir = App::getRootPath() . '/public/static/upload/book/' . $book->id;
-                    if (!file_exists($dir)) {
-                        mkdir($dir, 0777, true);
-                    }
-                    $cover = $request->file('cover');
-                    $cover->validate(['size' => 1024000, 'ext' => 'jpg,png,gif,jpeg'])
-                        ->move($dir, 'cover.jpg');
-                    //清理浏览器缓存
-                    header("Last-Modified: " . gmdate("D, d M Y H:i:s") . "GMT");
-                    header("Cache-Control: no-cache, must-revalidate");
-                }
-                $this->redirect('index/jump');
-            } else {
-                $this->error('修改失败');
+                $cover = $request->file('cover');
+                $cover->validate(['size' => 1024000, 'ext' => 'jpg,png,gif,jpeg'])
+                    ->move($dir, 'cover.jpg');
+                //清理浏览器缓存
+                header("Last-Modified: " . gmdate("D, d M Y H:i:s") . "GMT");
+                header("Cache-Control: no-cache, must-revalidate");
             }
-
+            $this->success('编辑成功', $returnUrl, '', 1);
         } else {
-            $this->error($validate->getError());
+            $this->error('修改失败');
         }
     }
 
@@ -170,13 +142,14 @@ class Books extends Base
         return ['err' => 0, 'msg' => '删除成功'];
     }
 
-    public function xiongzhang(){
-        if ($this->request->isPost()){
+    public function xiongzhang()
+    {
+        if ($this->request->isPost()) {
             $urls = [];
             $start = input('start');
             $end = input('end');
-            for ($i = $start;$i <= $end; $i++){
-                array_push($urls,config('site.url').'/index/books/index/id/'.$i.'.html') ;
+            for ($i = $start; $i <= $end; $i++) {
+                array_push($urls, config('site.url') . '/index/books/index/id/' . $i . '.html');
             }
             $result = xiongzhang_push($urls);
             $this->success($result);
@@ -184,9 +157,10 @@ class Books extends Base
         return view();
     }
 
-    public function search(){
+    public function search()
+    {
         $keyword = input('book_name');
-        $data = $this->bookService->getPagedBooksAdmin([['book_name','like','%'.$keyword.'%']]);
+        $data = $this->bookService->getPagedBooksAdmin([['book_name', 'like', '%' . $keyword . '%']]);;
         $books = $data['books'];
         $count = $data['count'];
         foreach ($books as &$book) {

@@ -14,7 +14,14 @@ use think\Model;
 class Chapter extends Model
 {
     protected $pk='id';
-    protected $autoWriteTimestamp = 'datetime';
+    protected $autoWriteTimestamp = true;
+
+    public static function init()
+    {
+        self::event('after_update', function ($chapter) {
+            cache('chapter' . $chapter->id,null);
+        });
+    }
 
     public function book(){
         return $this->belongsTo('book');

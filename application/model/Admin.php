@@ -9,7 +9,18 @@
 namespace app\model;
 
 
-class Admin
-{
+use think\Model;
 
+class Admin extends Model
+{
+    protected $pk='id';
+    protected $autoWriteTimestamp = true;
+
+    public function setUsernameAttr($value){
+        return trim($value);
+    }
+
+    public function setPasswordAttr($value){
+        return md5(strtolower(trim($value)));
+    }
 }

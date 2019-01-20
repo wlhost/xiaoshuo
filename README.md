@@ -1,6 +1,7 @@
 <<<<<<< HEAD
-# 小说cms，集手动上传TXT并自动分割、采集、对接追书api等功能为一体的独一无二的cms。
-- 将网站运行目录设置为public目录
+# 小涴熊小说CMS，基于ThinkPHP5.1开发。
+- 域名/install，进行首次安装。为了安全，安装完成后最好把install目录删除。
+- 将网站运行目录设置为public目录。
 - 如果是NGINX，添加以下伪静态规则：
 ```
   if (!-e $request_filename) {  

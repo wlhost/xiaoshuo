@@ -1,50 +1,64 @@
 {extend name="pub/base" /}
-{block name="content"}
-<div class="x-body">
-    <xblock>
-        <button class="layui-btn" onclick="x_admin_show('添加书籍','{:url("create",["book_id" => $book_id])}')"><i class="layui-icon"></i>添加
-        </button>
-        <button class="layui-btn" onclick="x_admin_show('自动分割','{:url("split",["book_id" => $book_id])}')"><i class="layui-icon"></i>自动分割
-        </button>
-        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-            <i class="layui-icon" style="line-height:30px">ဂ</i></a>
-        <span class="x-right" style="line-height:40px">共有数据：{$count} 条</span>
-    </xblock>
-    <table class="layui-table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>章节名</th>
-            <th>内容</th>
-            <th>创建时间</th>
-            <th>更新时间</th>
-            <th>操作</th>
-        </thead>
-        <tbody>
-        {volist name="chapters" id="vo"}
-        <tr class="text-c">
-            <td>{$vo.id}</td>
-            <td>{$vo.chapter_name}</td>
-            <td><button onclick="x_admin_show('查看内容','{:url("content",["book_id" => $book_id,"chapter_id" => $vo.id])}')"
-                class="layui-btn" target="_blank">查看</button></td>
-            <td>{$vo.create_time}</td>
-            <td>{$vo.update_time}</td>
-            <td class="td-manage">
-                <a title="编辑"  onclick="x_admin_show('编辑','edit?id={$vo.id}')" href="javascript:;">
-                    <i class="layui-icon">&#xe642;</i>
-                </a>
-                <a title="删除" onclick="del('{:url("chapters/delete",["id"=>$vo.id])}')" href="javascript:;">
-                    <i class="layui-icon">&#xe640;</i>
-                </a>
-            </td>
-        </tr>
-        {/volist}
-        </tbody>
-    </table>
-    <div class="page">
-        <div>
-            {$chapters|raw}
+{block name="title"}
+<title>章节管理</title>
+{/block}
+{block name="body"}
+<section class="Hui-admin-article">
+    <nav class="breadcrumb" style="background-color:#fff;padding: 0 24px"><i class="Hui-iconfont">&#xe67f;</i> 首页
+        <span class="c-gray en">&gt;</span>
+        {$book.book_name}
+        <span class="c-gray en">&gt;</span>
+        章节管理
+        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+           href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+    </nav>
+    <div class="panel mt-20">
+        <div class="panel-body">
+            <div class="clearfix">
+                <span class="f-l">
+                    <a class="btn btn-primary radius" href="/admin/chapters/create?book_id={$book.id}&returnUrl={$returnUrl}">添加章节</a>
+                    <a class="btn btn-primary radius" href="/admin/chapters/split?book_id={$book.id}&returnUrl={$returnUrl}">分割文本</a>
+                </span>
+            </div>
+            <div class="mt-20 clearfix">
+                <table class="table table-border table-bordered table-bg table-hover table-sort">
+                    <thead>
+                    <tr class="text-c">
+                        <th width="80">ID</th>
+                        <th width="100">章节名</th>
+                        <th width="100">内容</th>
+                        <th width="80">章节序</th>
+                        <th width="150">创建时间</th>
+                        <th width="150">更新时间</th>
+                        <th width="120">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {volist name="chapters" id="vo"}
+                    <tr class="text-c">
+                        <td>{$vo.id}</td>
+                        <td>{$vo.chapter_name}</td>
+                        <td><a class="btn btn-primary" href="{:url("content",["book_id" => $book_id,"chapter_id" => $vo.id])}">查看</a></td>
+                        <td>{$vo.order}</td>
+                        <td>{$vo.create_time|date='Y-m-d H:i'}</td>
+                        <td>{$vo.update_time|date='Y-m-d H:i'}</td>
+                        <td class="f-14 td-manage">
+                            <a style="text-decoration:none" class="ml-5" href="/admin/chapters/edit?id={$vo.id}&returnUrl={$returnUrl}"
+                               title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
+                            <a style="text-decoration:none" class="ml-5" onclick="del(this,{$vo.id})"
+                               href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                </table>
+                {$chapters|raw}
+            </div>
         </div>
     </div>
-</div>
+</section>
+
+
+<!--请在下方写此页面业务相关的脚本-->
+{include file="pub/index_scripts" /}
+<!--/请在上方写此页面业务相关的脚本-->
 {/block}

@@ -16,8 +16,4 @@ class TagService
     public function getByName($tagname){
         return Tag::where('tag_name','=',$tagname)->find();
     }
-
-    public function getByName2($tagname){
-        return Tag2::where('tag_name','=',$tagname)->find();
-    }
 }

@@ -15,9 +15,9 @@ use think\facade\App;
 class Chapters extends Base
 {
     public function index($id){
-        $chapter = Chapter::with(['book'=>['author']])->cache('chapter' . $id)->find($id);
+        $chapter = Chapter::with(['book'=>['author']])->cache('chapter' . $id)->find($id); //当前章节
         $book_id = $chapter->book_id;
-        $chapters = cache('mulu'.$book_id);
+        $chapters = cache('mulu'.$book_id); //查出所有目录
         if (!$chapters){
             $chapters = Chapter::where('book_id','=',$book_id)->select();
             cache('mulu'.$book_id,$chapters);
@@ -25,13 +25,13 @@ class Chapters extends Base
         $prev = cache('chapter_prev'.$id);
         if (!$prev){
             $prev = Db::query(
-                'select * from chapter where book_id='.$book_id.' and id<' . $id . ' order by id desc limit 1');
+                'select * from xwx_chapter where book_id='.$book_id.' and `order`<' . $chapter->order . ' order by id desc limit 1');
             cache('chapter_prev'.$id,$prev);
         }
         $next = cache('chapter_next'.$id);
         if (!$next){
             $next = Db::query(
-                'select * from chapter where book_id='.$book_id.' and id>' . $id . ' order by id limit 1');
+                'select * from xwx_chapter where book_id='.$book_id.' and `order`>' . $chapter->order . ' order by id limit 1');
             cache('chapter_next'.$id,$next);
         }
 
@@ -55,7 +55,6 @@ class Chapters extends Base
             'chapters' => $chapters,
             'content' => $content,
             'header_title' => $chapter->book->book_name,
-            'title' => $chapter->book->book_name.$chapter->chapter_name.'在线阅读',
         ]);
 
         return view($this->tpl);

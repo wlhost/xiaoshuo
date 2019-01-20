@@ -71,19 +71,19 @@ class Tags extends Base
         if (!$tags){
             $tags = Tag::all();
             foreach ($tags as &$tag) {
-                $tag['count'] = Db::query("SELECT COUNT(id) as count FROM book WHERE tag LIKE '%"
+                $tag['count'] = Db::query("SELECT COUNT(id) as count FROM xwx_book WHERE tag LIKE '%"
                     .$tag->tag_name."%'")[0]['count'];
             }
             cache('taglist_tags',$tags);
         }
         $all_count = cache('book_all_count');
         if (!$all_count){
-            $all_count = Db::query('SELECT COUNT(id) as count FROM book ')[0]['count'];
+            $all_count = Db::query('SELECT COUNT(id) as count FROM xwx_book ')[0]['count'];
             cache('book_all_count',$all_count);
         }
         $end_count = cache('book_end_count');
         if (!$end_count){
-            $end_count = Db::query("SELECT COUNT(id) as count FROM book WHERE `end` = 1")[0]['count'];
+            $end_count = Db::query("SELECT COUNT(id) as count FROM xwx_book WHERE `end` = 1")[0]['count'];
             cache('book_end_count',$end_count);
         }
         $this->assign([

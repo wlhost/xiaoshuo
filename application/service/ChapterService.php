@@ -25,7 +25,10 @@ class ChapterService
 
     public function getAdminChapters($where = '1=1'){
         $chapters = Chapter::where($where);
-        $pages = $chapters->order('id','desc')->paginate(5);
+        $pages = $chapters->order('id','desc')->paginate(5,false,[
+            'type'     => 'util\AdminPage',
+            'var_page' => 'page',
+        ]);
         return [
             'chapters' => $pages,
             'count' => $chapters->count(),
@@ -33,5 +36,9 @@ class ChapterService
     }
     public function findByName($chapter_name){
         return Chapter::where('chapter_name','=',$chapter_name)->find();
+    }
+
+    public function getLastChapter($book_id){
+        return Chapter::where('book_id','=',$book_id)->order('id','desc')->limit(1)->find();
     }
 }

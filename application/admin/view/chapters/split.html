@@ -1,30 +1,32 @@
 {extend name="pub/base" /}
-{block name="content"}
-<div class="x-body">
-    <form class="layui-form" action="{:url('split')}" method="post" enctype="multipart/form-data">
+{block name="title"}
+<title>自动分割</title>
+{/block}
+
+{block name="body"}
+<article class="clearfix pd-20">
+    <form class="form form-horizontal" action="{:url('split')}" method="post" enctype="multipart/form-data">
         <input type="hidden" value="{$book_id}" name="book_id">
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">
-                小说文件
-            </label>
-            <div class="layui-input-inline">
-                <input type="file" name="content" class="layui-input">
+        <input type="hidden" value="{$returnUrl}" name="returnUrl">
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3">小说文件</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="file" name="content" class="input-text">
             </div>
         </div>
 
-        <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">
-                目录文件
-            </label>
-            <div class="layui-input-inline">
-                <input type="file" name="index" class="layui-input">
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-3">目录文件</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="file" name="index" class="input-text">
             </div>
         </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label"></label>
-            <input type="submit" class="layui-btn" value="增加">
+        <div class="row clearfix">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
         </div>
     </form>
-</div>
+</article>
 {/block}
