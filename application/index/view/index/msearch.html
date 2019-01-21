@@ -83,7 +83,7 @@
         <ul class="book-list book-list-vetical">
             {volist name="books" id="vo"}
             <li>
-                <a href="{:url('books/index',['id'=>$vo.id])}">
+                <a href="/book/{$vo.id}">
                     <span class="thumb">
                          <img data-original="/static/upload/book/{$vo.id}/cover.jpg"
                               src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg" alt="{$vo.book_name}" class="lazyload cover" style="">

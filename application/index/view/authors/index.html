@@ -1,0 +1,87 @@
+{extend name="pub/base" /}
+{block name="seo"}
+<title>{$author.author_name}个人主页-{$author.author_name}作品集-{$site_name}</title>
+<meta name="description" content="这里是{$author.author_name}的个人主页，展示ta的所有作品">
+{/block}
+{block name="css"}
+<style>
+    .container {
+        padding-left: 40px;
+    }
+    .user-info {
+        line-height: 24px;
+    }
+    .user-info .vip-icon {
+        margin: 4px 6px;
+    }
+    .user-info .avatar > img {
+        width: 60px;
+        height: 60px;
+    }
+    .user-info .btn {
+        width: 90px;
+    }
+    .row .left {
+        width: 90%;
+        margin-left: 3.5%;
+    }
+    .book-list .book-overlay-info{
+        padding-top: 2rem;
+        text-align: center;
+        font-size: 0.8rem;
+    }
+    .text-center{
+        cursor: pointer;
+    }
+    .book-list{
+        min-height: 400px;
+    }
+</style>
+{/block}
+{block name="content"}
+<div class="row">
+    <div class="left">
+        <div class="user-info">
+            <a class="avatar" href="javascript:;">
+                <img class="lazyload" src="https://wx2.sinaimg.cn/mw690/ab72f980gy1fy63bnjqxhj202s02sq2x.jpg" style="">
+            </a>
+            <div class="pull-left" style="margin:6px 120px auto 16px;">
+                <a href="javascript:;" class="text-default name">{$author.author_name}</a>
+                <br><span class="smaller">签约作者</span>
+            </div>
+        </div>
+        <table class="table m-t">
+            <tbody>
+            <tr>
+                <!--                        <td data-bookList-type="shelf" class="J_BookListType text-primary text-center">书架</td>-->
+                <td colspan="2" data-booklist-type="up" class="J_BookListType text-primary text-center">作品</td>
+            </tr>
+            <tr id="J_ShelfBookList" style="display: none;">
+                <td colspan="2">
+                    <ul class="book-list J_BookList"></ul>
+                </td>
+            </tr>
+            <tr>
+            </tr>
+            <tr id="J_UpBookList">
+                <td colspan="2">
+                    <ul class="book-list J_BookList">
+                        {volist name="author.books" id="vo"}
+                        <li>
+                            <a href="/book/{$vo.id}" target="_blank" class="thumb">
+                                <img data-original="/static/upload/book/{$vo.id}/cover.jpg"
+                                     src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg" alt="{$vo.book_name}" class="lazyload cover" style="">
+                            </a> <a href="/book/{$vo.id}" target="_blank" class="title title-l2">{$vo.book_name}</a>
+                        </li>
+                        {/volist}
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{include file="pub/lazyload" /}
+{/block}

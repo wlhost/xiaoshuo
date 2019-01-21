@@ -203,15 +203,15 @@
 
     <div class="pages">
         {if $prev != "null"}
-        <button onclick="javascript:location.href='{:url(\'chapters/index\',[\'id\'=>$prev.id])}';"
+        <button onclick="javascript:location.href='/chapter/{$prev.id}';"
                 class="btn btn-primary btn-large">上一章
         </button>
         {/if}
         <button class="btn btn-large"
-                onclick="javascript:location.href='{:url(\'books/index\',[\'id\'=>$chapter.book_id])}';">目录
+                onclick="javascript:location.href='/book/{$chapter.book_id}';">目录
         </button>
         {if $next != "null"}
-        <button onclick="javascript:location.href='{:url(\'chapters/index\',[\'id\'=>$next.id])}'"
+        <button onclick="javascript:location.href='/chapter/{$next.id}'"
                 class="btn btn-primary btn-large">下一章节
         </button>
         {/if}

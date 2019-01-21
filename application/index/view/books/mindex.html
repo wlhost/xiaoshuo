@@ -180,11 +180,11 @@
                 <span class="J_FavorText">放入书架</span>
             </button>
             <button class="btn btn-outline-default J_SubscribeAll">全本订阅</button>
-            <a href="{:url('chapters/index',['id' => $start])}" class="btn btn-primary">开始阅读</a>
+            <a href="/chapter/{$start}" class="btn btn-primary">开始阅读</a>
         </div>
     </div>
     <div class="container">
-        <a class="block-title" href="{:url('books/chapterlist',['book_id'=>$book.id,'order'=>'asc'])}">
+        <a class="block-title" href="/chapterlist?book_id={$book.id}&order=asc">
             目录
             <span class="pull-right text-muted">
                 <span class="showhide">前往</span><i class="iconfont icon-arrow-right"></i>
@@ -202,7 +202,7 @@
         </div>
     </div>
     <div class="container">
-        <a href="{:url('authors/index',['id' => $book.author.id])}" class="block-title">
+        <a href="/author/{$book.author.id}" class="block-title">
             作者
             <span class="pull-right text-muted">
           <i style="display:inline-block;border-radius:50%;width:0.426rem;height:0.426rem;content:&#39;&#39;;background:#ffac83; vertical-align:middle;"></i>
@@ -218,7 +218,7 @@
         <ul class="book-list book-list-vetical">
             {volist name="book.author.books" id="vo" lenth="5"}
             <li>
-                <a href="{:url('books/index',['id'=>$vo.id])}">
+                <a href="/book/{$vo.id}">
                         <span class="thumb">
                            <img data-original="/static/upload/book/{$vo.id}/cover.jpg"
                                 src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg" alt="{$vo.book_name}" class="lazyload cover" style="">
@@ -253,7 +253,7 @@
     $(document).on('click', '.J_Tag', function(event) {
         var self = $(this);
         var tag = self.text();
-        window.location.href = "/index/tags/index?order=last_time&tag="+tag;
+        window.location.href = "/cate?order=last_time&tag="+tag;
     });
 </script>
 {/block}

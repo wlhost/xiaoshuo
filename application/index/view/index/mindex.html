@@ -18,7 +18,7 @@
 </head>
 <body style="font-size: 12px;">
 <div id="global_search_body">
-    <form id="search_header" method="get" target="_self" action="{:url('index/search')}">
+    <form id="search_header" method="get" target="_self" action="/search">
         <div class="left" style="width: 80%">
             <div class="search-wrap center">
                 <input class="input" type="text" name="keyword" id="search_book_input" value="" placeholder="输入你感兴趣的作品">
@@ -103,10 +103,10 @@
     <div id="index_header">
         <img class="logo" src="/static/images/logo.png">
         <!--<a href="#" class="user-center"><i class="iconfont icon-user-center"></i></a>-->
-        <a href="{:url('index/bookshelf')}" class="bookshelf"><i class="iconfont icon-wodeshujia"></i></a>
+        <a href="/bookshelf" class="bookshelf"><i class="iconfont icon-wodeshujia"></i></a>
     </div>
 
-    <form id="global_search" class="center" method="get" target="_self" action="{:url('index/search')}">
+    <form id="global_search" class="center" method="get" target="_self" action="/search">
         <input type="text" name="keyword" value="" class="input input-primary" placeholder="输入你感兴趣的作品">
         <a class="search" onclick="search()"><i class="iconfont icon-sousuo"></i></a>
     </form>
@@ -119,7 +119,7 @@
         <div class="banner-wrap" style="width: 1800px;">
             {volist name="banners" id="vo"}
             <div data-index="0" style="width: 360px; left: 0px; transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
-                <a href="{:url('books/index',['id'=>$vo.book_id])}">
+                <a href="/book/{$vo.book_id}">
                     <img src="/static/upload/banner/{$vo.pic_name}" alt="{$vo.title}" class="lazyload cover" style="">
                 </a>
             </div>
@@ -137,19 +137,19 @@
 
     <ul id="index_menu" class="row">
         <li class="col-xs-3">
-            <a class="menu-icon-fenlei" href="{:url('tags/taglist')}">
+            <a class="menu-icon-fenlei" href="/cate/catelist">
                 <i class="iconfont icon-fenlei"></i>
             </a>
             <p>分类</p>
         </li>
         <li class="col-xs-3">
-            <a class="menu-icon-paihang" href="{:url('rank/index')}">
+            <a class="menu-icon-paihang" href="/rank">
                 <i class="iconfont icon-paihang"></i>
             </a>
             <p>排行</p>
         </li>
         <li class="col-xs-3">
-            <a class="menu-icon-wanben" href="/index/tags/index?order=last_time&end=1">
+            <a class="menu-icon-wanben" href="/cate?order=last_time&end=1">
                 <i class="iconfont icon-wanben"></i>
             </a>
             <p>完本</p>
@@ -169,7 +169,7 @@
         <ul class="book-list book-list-large row">
             {volist name="hot" id="vo"}
             <li class="col-xs-4 col-lg-3">
-                <a href="{:url('books/index',['id'=>$vo.id])}">
+                <a href="/book/{$vo.id}">
                         <span class="thumb">
                             <img data-original="/static/upload/book/{$vo.id}/cover.jpg"
                                  src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg" alt="{$vo.book_name}" class="lazyload cover" style="">
@@ -188,7 +188,7 @@
         <ul class="book-list book-list-vetical">
             {volist name="newest" id="vo"}
             <li>
-                <a href="{:url('books/index',['id'=>$vo.id])}">
+                <a href="/book/{$vo.id}">
                         <span class="thumb">
                            <img data-original="/static/upload/book/{$vo.id}/cover.jpg"
                                 src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg" alt="{$vo.book_name}" class="lazyload cover" style="">
@@ -213,7 +213,7 @@
         <ul class="book-list row">
             {volist name="right_top" id="vo"}
             <li class="col-xs-3 col-lg-2">
-                <a href="{:url('books/index',['id'=>$vo.id])}">
+                <a href="/book/{$vo.id}">
                         <span class="thumb">
                             <img data-original="/static/upload/book/{$vo.id}/cover.jpg"
                                  src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg" alt="{$vo.book_name}" class="lazyload cover" style="">
@@ -224,7 +224,7 @@
             {/volist}
             {volist name="right_bottom" id="vo"}
             <li class="col-xs-3 col-lg-2">
-                <a href="{:url('books/index',['id'=>$vo.id])}">
+                <a href="/book/{$vo.id}">
                         <span class="thumb">
                             <img data-original="/static/upload/book/{$vo.id}/cover.jpg"
                                  src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg" alt="{$vo.book_name}" class="lazyload cover" style="">

@@ -61,8 +61,8 @@
     <div class="filter" name="range" id="tag_select">
         <label>分类：</label>
         <button class="btn" value="" onclick="changeActive(this);">全部</button>
-        {volist name="tags" id="vo"}
-        <button class="btn {$vo.active == 1 ? 'active' : ''}" value="{$vo.tag_name}" onclick="changeActive(this);">{$vo.tag_name}</button>
+        {volist name="cates" id="vo"}
+        <button class="btn {$vo.active == 1 ? 'active' : ''}" value="{$vo.cate_name}" onclick="changeActive(this);">{$vo.cate_name}</button>
         {/volist}
     </div>
     <div class="filter toggle" name="order" id="order_select">
@@ -92,7 +92,7 @@
         var tag = $('#tag_select button.active').val()==undefined?'':$('#tag_select button.active').val();
         var order = $('#order_select button.active').val();
         var end = $('#end_select button.active').val()==undefined?'':$('#end_select button.active').val();
-        location.href = "/index/tags/index?tag=" + tag + "&order=" + order + "&end=" + end;
+        location.href = "/cate?cate=" + tag + "&order=" + order + "&end=" + end;
     }
     //折叠搜索条件
     //备注： 如果想要全部折叠、或者部分折叠，
@@ -113,7 +113,7 @@
     <ul class="book-list J_BookList">
         {volist name="books" id="vo"}
         <li>
-            <a href="{:url('books/index',['id'=>$vo.id])}" target="_blank" class="thumb">
+            <a href="/book/{$vo.id}" target="_blank" class="thumb">
                 <img data-sizes="108px" alt="{$vo.book_name}" class="lazyload  cover" src="/static/upload/book/{$vo.id}/cover.jpg">
                 <div class="book-overlay-info">
                     <div class="avatar">
@@ -123,7 +123,7 @@
                     <p class="m-t">人气：{$vo.click}</p>
                 </div>
             </a>
-            <a href="{:url('books/index',['id'=>$vo.id])}" target="_blank" class="title title-l2">{$vo.book_name}</a>
+            <a href="/book/{$vo.id}" target="_blank" class="title title-l2">{$vo.book_name}</a>
         </li>
         {/volist}
     </ul>

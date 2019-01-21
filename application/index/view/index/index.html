@@ -15,7 +15,7 @@
         <div class="carousel-inner" role="listbox">
             {volist name="banners" id="vo"}
             <div class="item">
-                <a target="_blank" href="{:url('books/index',['id'=>$vo.book_id])}">
+                <a target="_blank" href="/book/{$vo.book_id}">
                     <img src="/static/upload/banner/{$vo.pic_name}" alt="{$vo.title}">
                     <div class="carousel-caption">
                     </div>
@@ -29,7 +29,7 @@
         <ul class="hot-recommend J_BookList">
             {volist name="right_lunbo" id="vo"}
             <li>
-                <a href="{:url('books/index',['id'=>$vo.id])}" target="_blank" class="thumb">
+                <a href="/book/{$vo.id}" target="_blank" class="thumb">
                     <img data-sizes="108px" alt="{$vo.book_name}！" class="lazyload  cover" data-original="/static/upload/book/{$vo.id}/cover.jpg"
                          src="https://wx1.sinaimg.cn/mw690/ab72f980gy1fy63bnky60j203m050dft.jpg">
                     <h3 class="mask-recommend hot-title">{$vo.book_name}</h3>
@@ -75,7 +75,7 @@
         <ul class="book-list J_BookList">
             {volist name="hot" id="vo"}
             <li>
-                <a href="{:url('books/index',['id'=>$vo.id])}" target="_blank" class="thumb">
+                <a href="/book/{$vo.id}" target="_blank" class="thumb">
                     <img data-sizes="108px" alt="{$vo.book_name}！" class="lazyload  cover" data-original="/static/upload/book/{$vo.id}/cover.jpg"
                          src="https://wx1.sinaimg.cn/mw690/ab72f980gy1fy63bnky60j203m050dft.jpg">
                     <div class="book-overlay-info">
@@ -87,7 +87,7 @@
                         <p>收藏：0</p>
                     </div>
                 </a>
-                <a href="{:url('books/index',['id'=>$vo.id])}" target="_blank" class="title title-l2">{$vo.book_name}</a>
+                <a href="/book/{$vo.id}" target="_blank" class="title title-l2">{$vo.book_name}</a>
             </li>
             {/volist}
         </ul>
@@ -101,12 +101,12 @@
         <ul class="rank-list J_BookList">
             {volist name="right_top" id="vo"}
             <li>
-                <a href="{:url('books/index',['id'=>$vo.id])}" target="_blank" class="thumb">
+                <a href="/book/{$vo.id}" target="_blank" class="thumb">
                     <img data-sizes="108px" alt="{$vo.book_name}！" class="lazyload  cover" data-original="/static/upload/book/{$vo.id}/cover.jpg"
                          src="https://wx1.sinaimg.cn/mw690/ab72f980gy1fy63bnky60j203m050dft.jpg">
                 </a>
                 <div class="book-info">
-                    <a href="{:url('books/index',['id'=>$vo.id])}" target="_blank" class="title title-l2">{$vo.book_name}</a>
+                    <a href="/book/{$vo.id}" target="_blank" class="title title-l2">{$vo.book_name}</a>
                     <div class="summaries">
                         {$vo.summary}
                     </div>
@@ -127,7 +127,7 @@
         <ul class="book-list J_BookList">
             {volist name="newest" id="vo"}
             <li>
-                <a href="{:url('books/index',['id'=>$vo.id])}" target="_blank" class="thumb">
+                <a href="/book/{$vo.id}" target="_blank" class="thumb">
                     <img data-sizes="108px" alt="{$vo.book_name}！" class="lazyload  cover"
                          data-original="/static/upload/book/{$vo.id}/cover.jpg"
                          src="https://wx1.sinaimg.cn/mw690/ab72f980gy1fy63bnky60j203m050dft.jpg">
@@ -140,7 +140,7 @@
                         <p>收藏：0</p>
                     </div>
                 </a>
-                <a href="{:url('books/index',['id'=>$vo.id])}" target="_blank" class="title title-l2">{$vo.book_name}</a>
+                <a href="/book/{$vo.id}" target="_blank" class="title title-l2">{$vo.book_name}</a>
             </li>
             {/volist}
         </ul>
@@ -154,12 +154,12 @@
         <ul class="rank-list J_BookList">
             {volist name="right_bottom" id="vo"}
             <li>
-                <a href="{:url('books/index',['id'=>$vo.id])}" target="_blank" class="thumb">
+                <a href="/book/{$vo.id}" target="_blank" class="thumb">
                     <img data-sizes="108px" alt="{$vo.book_name}！" class="lazyload  cover" data-original="/static/upload/book/{$vo.id}/cover.jpg"
                          src="https://wx1.sinaimg.cn/mw690/ab72f980gy1fy63bnky60j203m050dft.jpg">
                 </a>
                 <div class="book-info">
-                    <a href="{:url('books/index',['id'=>$vo.id])}" target="_blank" class="title title-l2">{$vo.book_name}</a>
+                    <a href="/book/{$vo.id}" target="_blank" class="title title-l2">{$vo.book_name}</a>
                     <div class="summaries">
                         {$vo.summary}
                     </div>

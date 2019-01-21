@@ -48,7 +48,7 @@ class Chapters extends Base
         $content = '';
         $arr = file(App::getRootPath().'public/static/upload/book/'.$book_id.'/'.$id.'.txt');
         foreach ($arr as $a) {
-            $content = $content.$a.'<br>';
+            $content = $content.$a.'<br><br>';
         }
         $this->assign([
             'chapter' => $chapter,

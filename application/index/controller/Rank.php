@@ -29,7 +29,7 @@ class Rank extends Base
         }
         $most_click_month = cache('most_click_month');
         if (!$most_click_month){
-            $most_click_month = $this->bookService->getBooksByTime(10,'click',date("Y-m-d",time()-30*24*3600);
+            $most_click_month = $this->bookService->getBooksByTime(10,'click',date("Y-m-d",time()-30*24*3600));
             cache('most_click_month',$most_click_month);
         }
         $most_click = cache('most_click');
@@ -39,12 +39,12 @@ class Rank extends Base
         }
         $newest_week = cache('newest_week');
         if (!$newest_week){
-            $newest_week = $this->bookService->getBooksByTime(10,'id',date("Y-m-d",time()-7*24*3600);
+            $newest_week = $this->bookService->getBooksByTime(10,'id',date("Y-m-d",time()-7*24*3600));
             cache('newest_week',$newest_week);
         }
         $newest_month = cache('newest_month');
         if (!$newest_month){
-            $newest_month = $this->bookService->getBooksByTime(10,'id',date("Y-m-d",time()-30*24*3600);
+            $newest_month = $this->bookService->getBooksByTime(10,'id',date("Y-m-d",time()-30*24*3600));
             cache('newest_month',$newest_month);
         }
         $newest = cache('newest');
@@ -54,12 +54,12 @@ class Rank extends Base
         }
         $update_week = cache('update_week');
         if (!$update_week){
-            $update_week = $this->bookService->getBooksByTime(10,'last_time',date("Y-m-d",time()-7*24*3600);
+            $update_week = $this->bookService->getBooksByTime(10,'last_time',date("Y-m-d",time()-7*24*3600));
             cache('update_week',$update_week);
         }
         $update_month = cache('update_month');
         if (!$update_month){
-            $update_month = $this->bookService->getBooksByTime(10,'last_time',date("Y-m-d",time()-30*24*3600);
+            $update_month = $this->bookService->getBooksByTime(10,'last_time',date("Y-m-d",time()-30*24*3600));
             cache('update_month',$update_month);
         }
         $update = cache('rank_update');{

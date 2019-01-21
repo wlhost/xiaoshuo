@@ -13,6 +13,7 @@ use app\model\Book;
 use app\model\Category;
 use think\Db;
 use app\service\ChapterService;
+use think\Request;
 
 class Books extends Base
 {
@@ -46,7 +47,9 @@ class Books extends Base
         return view($this->tpl);
     }
 
-    public function chapterlist($book_id,$order){
+    public function chapterlist(){
+        $book_id = input('book_id');
+        $order = input('order');
         $data = $this->chapterService->getChapters(20,$order,[
             ['book_id','=',$book_id]
         ]);

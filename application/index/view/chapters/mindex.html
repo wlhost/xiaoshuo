@@ -243,11 +243,11 @@
 </div>
 <div class="footer text-center pages">
     {if $prev != "null"}
-    <button onclick="javascript:location.href='{:url(\'chapters/index\',[\'id\'=>$prev.id])}';" class="btn btn-primary btn-large">上一章</button>
+    <button onclick="javascript:location.href='/chapter/{$prev.id}';" class="btn btn-primary btn-large">上一章</button>
     {/if}
-    <button class="btn btn-primary btn-large no" onclick="javascript:location.href='{:url(\'books/index\',[\'id\'=>$chapter.book_id])}';">回目录</button>
+    <button class="btn btn-primary btn-large no" onclick="javascript:location.href='/book/{$chapter.book_id}';">回目录</button>
     {if $next != "null"}
-    <button class="btn btn-primary btn-large" onclick="javascript:location.href='{:url(\'chapters/index\',[\'id\'=>$next.id])}'">下一章</button>
+    <button class="btn btn-primary btn-large" onclick="javascript:location.href='/chapter/{$next.id}'">下一章</button>
     {/if}
 </div>
 <script>

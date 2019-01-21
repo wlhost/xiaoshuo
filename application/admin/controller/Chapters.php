@@ -8,6 +8,7 @@
 
 namespace app\admin\controller;
 
+use think\Exception;
 use think\Request;
 use app\model\Book;
 use app\model\Chapter;
@@ -154,11 +155,10 @@ class Chapters extends Base
             $dir = App::getRootPath() . '/public/static/upload/book/'.$book_id;
             $file_info = $file->move($dir);
             $index_info = $index_file->move($dir);
-            try{
+
                 $this->process($file_info->getSaveName(),$index_info->getSaveName(), $book_id);
-            }finally{
                 $this->success('分割成功',$returnUrl,'',1);
-            }
+
         }
         return view();
     }
@@ -178,7 +178,7 @@ class Chapters extends Base
         }
         $arr = array_filter(preg_split('/[;\r\n]+/s',$content)); //将小说文本分行转换成数组
         $index_arr = array_filter(preg_split('/[;\r\n]+/s',$index)); //将目录文本分行转换成数组
-        $split_count = floor(count($arr)/count($index_arr)); //小说总行数除以章节总数，算出每章节多少行
+        $split_count = ceil(count($arr)/count($index_arr)); //小说总行数除以章节总数，算出每章节多少行
         $new = array_chunk($arr,$split_count); //分割成小数组
         $lastChapterOrder = 0;
         foreach ($new as $key => $value) {

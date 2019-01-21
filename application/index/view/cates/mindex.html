@@ -86,7 +86,7 @@
         <ul class="book-list book-list-vetical">
             {volist name="books" id="vo"}
             <li>
-                <a href="{:url('books/index',['id'=>$vo.id])}">
+                <a href="/book/{$vo.id}">
                     <span class="thumb">
                          <img data-original="/static/upload/book/{$vo.id}/cover.jpg"
                               src="https://s1.ax1x.com/2018/12/13/FN8WLQ.jpg" alt="{$vo.book_name}" class="lazyload cover" style="">
@@ -114,9 +114,9 @@
                 <td class="title">分类</td>
                 <td class="selection J_Filter" id="tag_select">
                     <button onclick="changeActive(this);">全部</button>
-                    {volist name="tags" id="vo"}
-                    <button class="{$vo.active==1?'active':''}" value="{$vo.tag_name}" onclick="changeActive(this);">
-                        {$vo.tag_name}
+                    {volist name="cates" id="vo"}
+                    <button class="{$vo.active==1?'active':''}" value="{$vo.cate_name}" onclick="changeActive(this);">
+                        {$vo.cate_name}
                     </button>
                     {/volist}
                 </td>
@@ -160,7 +160,7 @@
         var tag = $('#tag_select button.active').val()==undefined?'':$('#tag_select button.active').val();
         var order = $('#order button.active').val();
         var end = $('#end_select button.active').val()==undefined?'':$('#end_select button.active').val();
-        location.href = "/index/tags/index?tag=" + tag + "&order=" + order + "&end=" + end;
+        location.href = "/cate?cate=" + tag + "&order=" + order + "&end=" + end;
     }
 </script>
 <script>

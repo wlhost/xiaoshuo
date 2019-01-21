@@ -452,10 +452,10 @@
                 </div>
                 <div class="row">
                     <span class="pull-left">分类：</span>
-                    <span class="tag">{$book.category}</span>
+                    <span class="tag"><a href="/cate?cate_name={$book.category}">{$book.category}</a></span>
                 </div>
                 <div class="row">
-                    <button onclick="javascript:location.href='{:url("chapters/index",["id" => $start])}'" class="btn btn-primary">开始阅读</button>
+                    <button onclick="javascript:location.href='/chapter/{$start}'" class="btn btn-primary">开始阅读</button>
                 </div>
             </div>
         </div>
@@ -466,7 +466,7 @@
                 <div class="articles">
                     {volist name="book.chapters" id="vo"}
                     <span class="chapter_item">
-                        <a href="{:url('chapters/index',['id'=>$vo.id])}"
+                        <a href="/chapter/{$vo.id}"
                            target="_blank" style="color: #000000">{$vo.chapter_name}</a>
                     </span>
                     {/volist}
@@ -499,12 +499,12 @@
             <ul class="rank-list J_BookList">
                 {volist name="book.author.books" id="vo" lenth="7"}
                 <li>
-                    <a href="{:url('books/index',['id'=>$vo.id])}" target="_blank" class="thumb">
+                    <a href="/book/{$vo.id}" target="_blank" class="thumb">
                         <img data-sizes="108px" alt="{$vo.book_name}" class="lazyload  cover" data-original="https://avatar.shubl.com/novel/img_index_recommend/carousel_new/20181019093139136.jpg"
                              src="/static/upload/book/{$vo.id}/cover.jpg">
                     </a>
                     <div class="book-info">
-                        <a href="{:url('books/index',['id'=>$vo.id])}" target="_blank">{$vo.book_name}</a>
+                        <a href="/book/{$vo.id}" target="_blank">{$vo.book_name}</a>
                         <div class="summaries">
                             {$vo.summary}
                         </div>
