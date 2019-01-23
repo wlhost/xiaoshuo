@@ -1,6 +1,7 @@
 <?php
 namespace app\index\controller;
 
+use app\model\Author;
 use app\model\Banner;
 use app\service\BookService;
 
@@ -80,8 +81,12 @@ class Index extends Base
     public function search($keyword){
         $books = cache('searchresult'.$keyword);
         if (!$books){
-            $books = $this->bookService->searchByName($keyword);
+            $books = $this->bookService->search($keyword);
             cache('searchresult'.$keyword,$books);
+        }
+        foreach ($books as &$book){
+            $author = Author::get($book['author_id']);
+            $book['author'] = $author;
         }
         $this->assign([
             'books' => $books,

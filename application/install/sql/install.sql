@@ -45,13 +45,14 @@ CREATE TABLE `xwx_book` (
   `click` bigint(20) DEFAULT NULL,
   `src` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `book_name` (`book_name`) USING BTREE,
   KEY `create_time` (`create_time`),
   KEY `update_time` (`update_time`),
   KEY `last_time` (`last_time`),
+  KEY `category` (`category`),
   KEY `tags` (`tags`),
   KEY `end` (`end`),
-  KEY `author_id` (`author_id`)
+  KEY `author_id` (`author_id`),
+  FULLTEXT KEY `fidx` (`book_name`,`summary`) with parser ngram
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------

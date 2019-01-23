@@ -60,6 +60,10 @@ class BookService
         return Book::with('author')
             ->where('book_name','like','%'.$name.'%')->limit(50)->select();
     }
+    
+    public function search($keyword){
+        return Db::query("select * from xwx_book where match(book_name,summary) against ('".$keyword."' IN NATURAL LANGUAGE MODE)");
+    }
 
     public function getLastChapter($id){
         return Book::get($id)->last_chapter;
