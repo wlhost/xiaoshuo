@@ -37,12 +37,18 @@ class Books extends Base
             $start = $db ? $db[0]['id'] : -1;
             cache('book_start' . $id, $start);
         }
-        $category = Category::where('cate_name','=',$book->category)->find();
+        $category = Category::where('cate_name','=',$book->category)->cache('category'.$id)->find();
+        $last_chapter = cache('last_chapter'.$id);
+        if ($last_chapter == false){
+            $last_chapter = $this->chapterService->getLastChapter($id);
+            cache('last_chapter'.$id,$last_chapter);
+        }
         $this->assign([
             'book' => $book,
             'start' => $start,
             'gender' => $category->gender,
             'header_title' => $book->book_name,
+            'last_chapter' => $last_chapter
         ]);
         return view($this->tpl);
     }
