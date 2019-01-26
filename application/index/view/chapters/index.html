@@ -184,8 +184,8 @@
     <div class="article-title">{$chapter.chapter_name}</div>
     <div class="article-info">
         <span>作者：{$chapter.book.author.author_name}</span>
-        <span>发布日期:{$chapter.book.create_time}</span>
-        <span>更新日期:{$chapter.book.update_time}</span>
+        <span>发布日期:{$chapter.book.create_time|date='Y-m-d H:i'}</span>
+        <span>更新日期:{$chapter.book.last_time|date='Y-m-d H:i'}</span>
     </div>
     <div class="article-content" id="J_BookCnt">
         <div class="read-bd" id="J_BookRead" style="font-size: 18px;">
