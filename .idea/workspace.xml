@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9fe32b36-b383-4dab-b3e4-e462bc231e19" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/application/index/controller/Books.php" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/controller/Books.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/index/view/books/mindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/application/index/view/books/mindex.html" afterDir="false" />
-    </list>
+    <list default="true" id="9fe32b36-b383-4dab-b3e4-e462bc231e19" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -252,7 +249,7 @@
       <path value="$PROJECT_DIR$/vendor/composer" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="315" />
     <option name="y" value="175" />
     <option name="width" value="1280" />
@@ -500,15 +497,15 @@
       <workItem from="1548066574581" duration="5300000" />
       <workItem from="1548087003500" duration="1298000" />
       <workItem from="1548211902017" duration="9000" />
-      <workItem from="1548489260503" duration="816000" />
+      <workItem from="1548489260503" duration="1125000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="284742000" />
+    <option name="totallyTimeSpent" value="285051000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21179625" />
