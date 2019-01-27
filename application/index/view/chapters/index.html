@@ -178,7 +178,7 @@
 
 <div class="book-read-box container white-bg">
     <div class="bread"><a href="/">首页</a> &gt;
-        <a href="{:url('books/index',['id'=>$chapter.book_id])}">{$chapter.book.book_name}</a> &gt;
+        <a href="/book/{$chapter.book.id}">{$chapter.book.book_name}</a> &gt;
         {$chapter.chapter_name}
     </div>
     <div class="article-title">{$chapter.chapter_name}</div>
