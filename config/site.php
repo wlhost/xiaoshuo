@@ -10,5 +10,5 @@ return [
     'url' => 'http://www.yqxs8.cc',
     'site_name' => '言情小说吧',
     'xiongzhang' => 'http://data.zz.baidu.com/urls?appid=1618917886908104&token=UxzKf5BllKD4Kof7&type=realtime',
-    'salt' => 'xwx'
+    'salt' => 'xwx',
 ];
