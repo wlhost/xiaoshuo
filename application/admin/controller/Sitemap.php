@@ -33,13 +33,13 @@ class Sitemap extends Base
             'priority' => '1.0'
         );
         $taglist= array(
-            'loc' => $site_name.'/index/tags/index.html',
+            'loc' => $site_name.'/cate',
             'priority' => '0.5',
             'lastmod' => date("Y-m-d"),
             'changefreq' => 'yearly'
         );
         $ranklist= array(
-            'loc' => $site_name.'/index/rank/index.html',
+            'loc' => $site_name.'/rank',
             'priority' => '0.5',
             'lastmod' => date("Y-m-d"),
             'changefreq' => 'yearly'
@@ -47,7 +47,7 @@ class Sitemap extends Base
         $books = Book::all();
         foreach ($books as $key=>$book){ //这里构建所有的内容页数组
             $temp = array(
-                'loc' => $site_name.'/index/books/index/id/'.$book->id.'.html',
+                'loc' => $site_name.'/book/'.$book->id,
                 'priority' => '0.9',
             );
             array_push( $data,$temp);
