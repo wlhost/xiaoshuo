@@ -40,8 +40,8 @@ class Admins extends Base
             $this->error('存在同名账号');
         }else{
             $admin = new Admin();
-            $admin->username = data['username'];
-            $admin->password = data['password'].config('site.salt');
+            $admin->username = $data['username'];
+            $admin->password = $data['password'].config('site.salt');
             $admin->save();
             $this->success('新增管理员成功','index','',1);
         }

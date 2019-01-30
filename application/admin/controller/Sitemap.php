@@ -52,7 +52,6 @@ class Sitemap extends Base
             );
             array_push( $data,$temp);
         }
-
         array_push($data,$main);
         array_push($data,$taglist);
         array_push($data,$ranklist);
