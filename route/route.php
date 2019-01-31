@@ -10,8 +10,8 @@
 // +----------------------------------------------------------------------
 use think\facade\Route;
 
-Route::rule('/cate/[:name]', 'index/cates/index');
 Route::rule('/cate/catelist', 'index/cates/catelist');
+Route::rule('/cate/[:name]', 'index/cates/index');
 Route::rule('/book/:id', 'index/books/index');
 Route::rule('/chapterlist', 'index/books/chapterlist');
 Route::rule('/chapter/:id', 'index/chapters/index');

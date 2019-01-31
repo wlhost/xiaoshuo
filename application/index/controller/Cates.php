@@ -71,19 +71,19 @@ class Cates extends Base
         if (!$cates){
             $cates = Category::all();
             foreach ($cates as &$cate) {
-                $tag['count'] = Db::query("SELECT COUNT(id) as count FROM xwx_book WHERE category LIKE '%"
+                $cate['count'] = Db::query("SELECT COUNT(id) as count FROM " .$this->prefix. "book WHERE category LIKE '%"
                     .$cate->cate_name."%'")[0]['count'];
             }
             cache('catelist_tags',$cates);
         }
         $all_count = cache('book_all_count');
         if (!$all_count){
-            $all_count = Db::query('SELECT COUNT(id) as count FROM xwx_book ')[0]['count'];
+            $all_count = Db::query('SELECT COUNT(id) as count FROM ' .$this->prefix. 'book ')[0]['count'];
             cache('book_all_count',$all_count);
         }
         $end_count = cache('book_end_count');
         if (!$end_count){
-            $end_count = Db::query("SELECT COUNT(id) as count FROM xwx_book WHERE `end` = 1")[0]['count'];
+            $end_count = Db::query("SELECT COUNT(id) as count FROM " .$this->prefix. "book WHERE `end` = 1")[0]['count'];
             cache('book_end_count',$end_count);
         }
         $this->assign([

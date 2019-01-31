@@ -10,6 +10,7 @@ namespace app\admin\controller;
 use think\Controller;
 use think\facade\Session;
 use think\App;
+use think\facade\View;
 
 class Base extends Controller
 {
@@ -23,7 +24,7 @@ class Base extends Controller
     {
         parent::__construct($app);
         $this->salt = config('site.salt');
-        $this->assign([
+        View::share([
             'returnUrl' => $this->request->url(true)
         ]);
     }

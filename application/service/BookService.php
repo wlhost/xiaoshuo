@@ -8,10 +8,11 @@
 
 namespace app\service;
 
+use app\index\controller\Base;
 use app\model\Book;
 use think\Db;
 
-class BookService
+class BookService extends Base
 {
     public function getPagedBooksAdmin($where = '1=1'){
         $data = Book::where($where);
@@ -46,9 +47,9 @@ class BookService
     }
 
     public function getRandBooks($num){
-        return Db::query("SELECT ad1.id,book_name,summary,click FROM xwx_book AS ad1 JOIN 
-(SELECT ROUND(RAND() * ((SELECT MAX(id) FROM xwx_book)-(SELECT MIN(id) FROM xwx_book))+(SELECT MIN(id) FROM xwx_book)) AS id)
- AS t2 WHERE ad1.id >= t2.id ORDER BY ad1.id LIMIT " . $num);
+        return Db::query('SELECT ad1.id,book_name,summary,click FROM '.$this->prefix.'book AS ad1 JOIN 
+(SELECT ROUND(RAND() * ((SELECT MAX(id) FROM '.$this->prefix.'book)-(SELECT MIN(id) FROM '.$this->prefix.'book))+(SELECT MIN(id) FROM '.$this->prefix.'book)) AS id)
+ AS t2 WHERE ad1.id >= t2.id ORDER BY ad1.id LIMIT ' . $num);
     }
 
     public function getByName($name)
@@ -62,7 +63,7 @@ class BookService
     }
     
     public function search($keyword){
-        return Db::query("select * from xwx_book where match(book_name,summary) against ('".$keyword."' IN NATURAL LANGUAGE MODE)");
+        return Db::query("select * from ".$this->prefix."book where match(book_name,summary) against ('".$keyword."' IN NATURAL LANGUAGE MODE)");
     }
 
     public function getLastChapter($id){

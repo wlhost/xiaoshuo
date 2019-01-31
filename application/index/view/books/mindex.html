@@ -37,7 +37,7 @@
 
     #book_info .thumb img {
         width: 100%;
-        height: auto;
+        height: 100%;
         margin: auto 0;
     }
 
@@ -187,7 +187,7 @@
         <a class="block-title" href="/chapterlist?book_id={$book.id}&order=asc">
             目录
             <span class="pull-right text-muted">
-                <span class="showhide">最新章节：{$last_chapter}</span><i class="iconfont icon-arrow-right"></i>
+                <span class="showhide">最新章节：{$last_chapter.chapter_name}</span><i class="iconfont icon-arrow-right"></i>
             </span>
         </a>
     </div>

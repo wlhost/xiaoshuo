@@ -9,7 +9,73 @@
     <link rel="stylesheet" type="text/css" href="/static/css/iconfont.css">
     <link rel="stylesheet" type="text/css" href="/static/css/mstyle.css">
     <link rel="stylesheet" type="text/css" href="/static/css/grid.css">
+    <style>
+        /* ads */
+        .banner {
+            position: relative;
+            overflow: hidden;
+            height: 5.4375rem;
+        }
+        .banner-wrap {
+            position: relative;
+            overflow: hidden;
+            height: 5.4375rem;
+        }
+        .banner-wrap > div {
+            display: inline-block;
+            position: relative;
+            float: left;
+            width: 100%;
+            height: 5.4375rem;
+        }
+        .banner-wrap > div img {
+            width: 100%;
+            height: 5.4375rem;
+        }
 
+        .banner-page {
+            display: block;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+        .banner-page li {
+            display: inline-block;
+            width: 0.15625rem;
+            height: 0.15625rem;
+            border-radius: 0.78125rem;
+            background-color: #f1ecce;
+            margin: 0 0.01rem;
+        }
+        .banner-page li.on {
+            width: 0.312rem;
+            background-color: #fa7298;
+        }
+
+        /*index menu */
+        #index_menu {
+            margin: 0.3195rem 0;
+            height: 1.943625rem;
+            background: #fff;
+        }
+        #index_menu li {
+            padding: 0.3195rem 0;
+            line-height: 1;
+            font-size: 0.3195rem;
+            text-align: center;
+        }
+        #index_menu li a {
+            width: 0.852rem;
+            height: 0.852rem;
+            margin-bottom: 0.15975rem;
+            display: inline-block;
+        }
+        #main .container + .container {
+            margin-top: 0.3195rem;
+        }
+
+    </style>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="/static/js/flexible.js"></script>
     <script src="/static/js/jquery.uiAlertView-1.0.0.js"></script>
@@ -32,73 +98,6 @@
 </div>
 {include file="pub/m_menu" /}
 <!--container start-->
-<style>
-    /* ads */
-    .banner {
-        position: relative;
-        overflow: hidden;
-        height: 5.4375rem;
-    }
-    .banner-wrap {
-        position: relative;
-        overflow: hidden;
-        height: 5.4375rem;
-    }
-    .banner-wrap > div {
-        display: inline-block;
-        position: relative;
-        float: left;
-        width: 100%;
-        height: 5.4375rem;
-    }
-    .banner-wrap > div img {
-        width: 100%;
-        height: 5.4375rem;
-    }
-
-    .banner-page {
-        display: block;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-    }
-    .banner-page li {
-        display: inline-block;
-        width: 0.15625rem;
-        height: 0.15625rem;
-        border-radius: 0.78125rem;
-        background-color: #f1ecce;
-        margin: 0 0.01rem;
-    }
-    .banner-page li.on {
-        width: 0.312rem;
-        background-color: #fa7298;
-    }
-
-    /*index menu */
-    #index_menu {
-        margin: 0.3195rem 0;
-        height: 1.943625rem;
-        background: #fff;
-    }
-    #index_menu li {
-        padding: 0.3195rem 0;
-        line-height: 1;
-        font-size: 0.3195rem;
-        text-align: center;
-    }
-    #index_menu li a {
-        width: 0.852rem;
-        height: 0.852rem;
-        margin-bottom: 0.15975rem;
-        display: inline-block;
-    }
-    #main .container + .container {
-        margin-top: 0.3195rem;
-    }
-
-</style>
 <div class="bg-white" style="padding-top:0.26625rem">
     <div id="index_header">
         <img class="logo" src="/static/images/logo.png">

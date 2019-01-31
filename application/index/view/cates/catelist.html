@@ -37,20 +37,20 @@
 <div class="bg-gray before-banner-footer" style="padding-top:0.3195rem">
     <ul id="categorylist">
         <li>
-            <a href="{:url('cates/index')}">
+            <a href="/cate">
                 <span class="name">全部</span>
                 <span>共{$all_count}本作品<i class="iconfont icon-arrow-right"></i></span>
             </a>
         </li>
         <li>
-            <a  href="/index/cates/index?order=last_time&end=1">
+            <a  href=/cate?order=last_time&end=1">
                 <span class="name">完本</span>
                 <span>共{$end_count}本作品<i class="iconfont icon-arrow-right"></i></span>
             </a>
         </li>
         {volist name="cates" id="vo"}
         <li>
-            <a href="/index/cates/index?order=last_time&cate={$vo.cate_name}">
+            <a href="/cate?order=last_time&cate={$vo.cate_name}">
                 <span class="name">{$vo.cate_name}</span>
                 <span>共{$vo.count}本作品<i class="iconfont icon-arrow-right"></i></span>
             </a>
